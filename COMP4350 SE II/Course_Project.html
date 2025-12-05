@@ -1,0 +1,207 @@
+<h1 id="requirements-of-course-project">Requirements of course project</h1>
+<p>This project requires a team of approximately six members to develop a full-stack web application that meets specific functional, non-functional, and process requirements. You will work as a group throughout the term to build the software system: </p>
+<h2 id="software-system-requirements">Software System Requirements</h2>
+<p>The developed software system must satisfy the following criteria:</p>
+<ul>
+<li><p><strong>Full-Stack Architecture:</strong> The application must include both a server-side (backend) component and a web client (frontend) component.</p>
+</li>
+<li><p><strong>Core Features (Functional Requirement):</strong> The application must implement a number of core functional features equal to the team size (e.g., a team of 5 must implement 5 core features). This count excludes non-functional requirements.</p>
+</li>
+<li><p><strong>Capacity Requirement (Non-Functional Requirement):</strong> The system must be able to concurrently handle 20 users generating a total of 200 requests per minute.</p>
+</li>
+<li><p><strong>External Resource Usage:</strong> There are no limitations on reusing existing external frameworks, libraries, or services (e.g., a cloud-provided database). You are free to use any such resources, but you must implement the core logic of the specified core features yourself.</p>
+</li>
+</ul>
+<h2 id="devops-and-quality-assurance-qa-practices">DevOps and Quality Assurance (QA) Practices</h2>
+<p>In addition to the software system requirements, each team must apply the following techniques and practices throughout the project&#39;s lifecycle:</p>
+<ul>
+<li><p><strong>Continuous Integration (CI):</strong> Establish a CI pipeline to automate the following steps for every commit pushed to the main branch (Deadline: By the end of Sprint 2):</p>
+<ul>
+<li><p>Auto Build</p>
+</li>
+<li><p>Regression Testing</p>
+</li>
+<li><p>Code Review</p>
+</li>
+</ul>
+</li>
+<li><p><strong>Continuous Deployment/Delivery (CD):</strong> Establish a CD pipeline to automate the system&#39;s deployment (Deadline: By the end of Sprint 3):</p>
+<ul>
+<li>Containerization using Docker</li>
+<li>Enable pushing the resulting Docker image to DockerHub</li>
+</ul>
+</li>
+<li><p><strong>Security Analysis Integration:</strong> Integrate security analysis tools into the established CI pipeline (Deadline: by the end of Sprint 4).</p>
+</li>
+<li><p><strong>Load Testing:</strong> Conduct load testing of the application to verify it meets the capacity requirement (Deadline: by the end of Sprint 4)</p>
+</li>
+</ul>
+<p>Below are more details regarding a recommended CI/CD pipeline and advanced quality assurance (QA) techniques to be applied to your course project (see Figure 1).</p>
+<p><strong>Figure 1 CI/CD pipeline</strong></p>
+<p><img src="CI_CD_flow.png" alt="Figure 1 CI/CD pipeline"></p>
+<p><strong>Development:</strong> Each developer works on a separate feature branch. They may commit changes to their branch as frequently as needed.</p>
+<p><strong>CI pipeline:</strong> When a developer is ready to merge their work into the main branch, they must create a pull request. This pull request triggers two validation steps: 1) Automated build and testing; 2) Code review. Typically, the review request is sent to the reviewer only after all automated tests pass. Once the pull request successfully completes both validation steps, it can be merged into the main branch.</p>
+<p>This CI pipeline which enables the auto build &amp; testing + code review, should be implemented by the end of sprint 2. <strong>However, the test cases that are used by the auto testing can be added gradually as the system grows, You don&#39;t have to prepare all the test cases by sprint 2.</strong></p>
+<p><strong>CD pipeline:</strong> When the team decides to release a new version, such as sprint 3 and sprint 4, the system should be packaged into a docker image and deployed to a docker container hosted somewhere (e.g., local machine, lab machine, or cloud). Afterward, the image should be pushed to DockerHub. The CD pipeline that enables to containerize your system using Docker and push your Docker image to DockerHub automatically, must be implemented by the end of sprint 3.</p>
+<p>You may adjust the following settings as needed based on your project and team structure.</p>
+<ul>
+<li><strong>Auto testing:</strong> regression testing and security analysis are mandatory to be implemented in the CI pipeline by Spring 2 and 4, respectively. For regression testing, you have to run at least <strong>unit testing</strong> and <strong>integration testing</strong> to cover the core functions (see more requirements in <a href="https://umanitoba-my.sharepoint.com/:w:/g/personal/shaowei_wang_umanitoba_ca/ESVHCftOA3dEoyv2fPvt_sABDs_GkhiIzt1uZGgcPdBnSA?e=r66qax">testing plan template</a>). For the security analysis, you need to use one security scanner (e.g., sonarcloud) to scan your source code and generate a report. <strong>Load testing is optional for CI</strong>. You may perform load testing individually in Sprint 4. </li>
+</ul>
+<ul>
+<li><p><strong>Local testing:</strong> You have more flexibility on the local testing. Local testing can be conducted on multiple levels (e.g., unit testing, integration testing, and system testing) or only unit testing is conducted. However, 100% back-end code coverage is required, i.e., all the back-end code should be covered by the tese cases.</p>
+</li>
+<li><p><strong>Production environment:</strong>  production environment (i.e., docker container) can be hosted either on your local machine, lab machine, or service provider (e.g., AWS). From sprint 3, you need to make your system deployed on Docker and push it to Docker hub. Note that you don&#39;t have to host the production environment all the time, which may cost money if you select to use the commercial cloud. Making it work when necessary is enough, e.g., demo and acceptance testing.</p>
+</li>
+<li><p><strong>Deployment:</strong> as we introduced in the class, there are two concepts of CD pipeline, one is continuous deployment and another is continuous delivery. The only difference between them is that in continuous delivery, deployment to production is triggered manually (e..g, click a button to run the pipeline), while in continuous deployment, the deployment is triggered automatically after all validation steps are passed. You may choose either approach based on your project needs.</p>
+</li>
+</ul>
+<h1 id="frequently-asked-questions">Frequently asked questions</h1>
+<p><strong>Do we need a full set of tests (e.g., 10 unit tests and 10 integration tests) for each core feature by Sprint 2?</strong></p>
+<p>For unit tests, yes. For every feature you have implemented, you must provide at least 10 unit tests. For example, if you have completed 2 features, you must have at least 20 unit tests (10 per feature).</p>
+<p>For integration tests, no. You do not need to complete 10 integration tests by Sprint 2. You can add integration tests gradually as more features are developed.</p>
+<p><strong>2. Are the unit tests specifically for back-end code? Or can it be a mix of both front-end and back-end?</strong></p>
+<p>They can cover both. Unit tests are intended to check individual program units (e.g., functions, methods, classes) and detect potential bugs across the codebase.
+However, all back-end source code must be covered by your unit tests. Front-end unit tests are optional but encouraged if feasible.</p>
+<p><strong>3. How do we run regression testing?</strong></p>
+<p>We will introduce some test selection and prioritization strategies in class, but you are not required to use them (though you may try if interested). For this course, simply running all available test cases is sufficient for regression testing. You can configure regression testing in your build system. For example, if you use Maven, you can enable automated test execution in the pom.xml file.</p>
+<p><strong>4. Which CI/CD tools should we use?</strong></p>
+<p>It is flexible to choose the CI/CD tool your team wish to use. The class will introduce using Jenkins for CI/CD and Git Action. I would say choose the tool you are most comfortable to use.</p>
+<p><strong>5. Do I need to generate a Docker image for both the front end and back end?</strong>
+Yes. You need to generate Docker images for both. You may choose to package them together in a single image or separately in individual images.</p>
+<p><strong>6. Must I package all my services/apps into one single Docker image?</strong>
+No. You may use multiple Docker images. For example, if you are using a microservices architecture, each service can be packaged in its own Docker image.</p>
+<p><strong>7. What if my team members do not progress or work well?</strong></p>
+<p>Peer evaluation is used to assess the performance of each member in the team. The commits made in GitHub will also be considered when grading each team member.</p>
+<p><strong>8. Should I use a particular coding convention?</strong></p>
+<p>No. You can use any style of coding convention, as long as the code is <strong>readable</strong> and <strong>consistent</strong> across your codebase. Note that, decide the coding convention <strong>AS EARLY AS</strong> possible. <strong>It takes remarkable efforts to fix it in the later sprints.</strong></p>
+<p><strong>To get some flavor how the project looks, here are some examples of course projects by previous teams. Note that they are not perfect and some of them might not meet all requirements.</strong></p>
+<ul>
+<li><a href="https://github.com/Patelzil/E-Book-Hub">https://github.com/Patelzil/E-Book-Hub</a> </li>
+<li><a href="https://github.com/prosaox/Study-tool">https://github.com/prosaox/Study-tool</a> </li>
+<li><a href="https://github.com/NerdyNomads/Text-Savvy">https://github.com/NerdyNomads/Text-Savvy</a> </li>
+</ul>
+<h1 id="evaluation-of-course-project">Evaluation of course project</h1>
+<p>The project will be evaluated as follows:</p>
+<ul>
+<li>Project proposal + presentation (5%)</li>
+<li>Progress tracking (20%, 4 sprints, each sprint 5%)</li>
+<li>Technique sharing seminar (5%)</li>
+<li>Final project presentation (10%)</li>
+<li>Final project deliverable (20%)</li>
+<li></li>
+</ul>
+<p><strong>For the project grade for each individual member, a peer evaluation will be conducted on each team member and the final grade for project will be weighted on it.</strong></p>
+<h2 id="project-proposal-2-5-presentation-2-5-">Project proposal (2.5%) + presentation (2.5%)</h2>
+<p>Each team will need submit a project proposal, which includes project summary, core features, user stories, and present their proposed project in the class.</p>
+<h2 id="progress-tracking-4-sprints-each-sprint-5-">Progress tracking (4 sprints, each sprint 5%)</h2>
+<p>Your work on the software will be evaluated periodically (4 sprints); thus, regular and continuous progress is expected. The system will be completed before the end of the term. Each team will arrange time to meet with TA at the due of each sprint to evaluate their progress based on the marking scheme below and get feedback.</p>
+<h3 id="marking-scheme">Marking scheme</h3>
+<ul>
+<li><strong>See the attached <a href="https://umanitoba-my.sharepoint.com/:f:/g/personal/shaowei_wang_umanitoba_ca/Es0D8WteD6hJprNCbfOvQ7cBtOVtTdN98ExS72yz5y16cw?e=rZ49hM">rubric for sprints</a></strong></li>
+</ul>
+<h3 id="tasks-for-each-sprint">Tasks for each sprint</h3>
+<ul>
+<li><p><strong>Sprint 1 (Deadline - Week4)</strong></p>
+<ul>
+<li>Form team and select liaisons</li>
+<li>Propose project</li>
+<li>Set up GitHub environment</li>
+<li>Work on requirements elicitation with customer (i.e., TA), - set up meeting with TA as earlier as possible. </li>
+<li>Work on the user stories for core features</li>
+</ul>
+</li>
+<li><p><strong>Sprint 2 (Deadline - Week8)</strong></p>
+<ul>
+<li>System design</li>
+<li>Development</li>
+<li>Develop testing plan</li>
+<li>Testing (e.g., regression testing)</li>
+<li>Continuous integration</li>
+<li>Working system and get feedback from TA</li>
+</ul>
+</li>
+<li><p><strong>Sprint 3 (Deadline - Week11)</strong></p>
+<ul>
+<li>Development</li>
+<li>Testing</li>
+<li>Continuous deployment</li>
+<li>Working system and get feedback from TA</li>
+</ul>
+</li>
+<li><p><strong>Sprint 4 (Deadline - Week12)</strong></p>
+<ul>
+<li>Fix bugs</li>
+<li>Add additional features</li>
+<li>Security analysis</li>
+<li>Load testing</li>
+<li>Final Project Demo</li>
+</ul>
+</li>
+</ul>
+<h2 id="technique-sharing-seminar-5-">Technique sharing seminar (5%)</h2>
+<p>The purpose of the seminar is to share knowledge and experience among teams. The topic of the seminar could be technology, design choice, challenges you faced and how you solved them, and lessons have learned, etc.</p>
+<p>The seminar should be 15 mins (13 minutes for presentation, 2 mins for Q&amp;A ) for each team.</p>
+<h2 id="final-project-presentation-10-">Final project presentation (10%)</h2>
+<p>Each team will give a 15-minutes (13 minutes for presentation, 2 mins for Q&amp;A ) to introduce their project.</p>
+<p>Covered in the presentation:</p>
+<p>1) Quick recap of the project (~1 minutes)</p>
+<p>2) Demo of the project (~6-7 minutes)</p>
+<p>3) Discussion of the development process (6-7 minutes). You can choose a few of the following items to discuss, or something else you find interesting or relevant (<strong>avoid having overlap with your seminar presentation</strong>):</p>
+<ul>
+<li>What was the overall architecture of your system?</li>
+<li>How did the project change from your initial (iteration 0) vision or stories, or did it work out as predicted?</li>
+<li>How is the system is tested?</li>
+<li>What went right in the development process?</li>
+<li>What went wrong in the development process?</li>
+<li>What would you do differently, if you had the chance to start over?</li>
+<li>How large is the project (number of methods, classes, etc)? How much of this is (roughly) devoted to each major system component? And any other quantifiables (e.g. if you have a record of hours spent on tasks).</li>
+<li>What took the most time? The least? Any surprises?</li>
+<li>Are there any particular design smells, or brilliant design decisions?</li>
+<li>Are there any outstanding bugs?</li>
+<li>Did any features work better than expected?</li>
+<li>Are you using any technologies other than what was required (e.g. JMock, GUI builders, etc.)?</li>
+<li>What did you learn about team or large project development? What will you start doing, keep doing, or stop doing next time?</li>
+<li>Can you draw any conclusions from what you&#39;ve done?</li>
+</ul>
+<p><strong>Marking scheme</strong></p>
+<p>Because this is a design-focused project, it is not feasible to define precise, objective grading criteria. Instead, we will use a <strong>ranking-based evaluation system</strong> for the project presentations. Your ranking will naturally depend on what other teams produce, essentially a <em>market-based</em> comparison. Teams that deliver the most impressive and polished work will receive the highest ranks.</p>
+<p>This also means that if your final grade is lower than expected, it does not necessarily indicate poor work. Rather, it reflects that other teams performed better in this comparative evaluation.</p>
+<p>Grades will be scaled to the range <strong>[5, 10]</strong> using the following formula:</p>
+<p><code>Grade = 10 - (rank - 1) * 5 / (number_of_teams - 1)</code></p>
+<p>Under this scheme, the top-ranked team receives <strong>10</strong>, and the lowest-ranked team receives <strong>5</strong>.</p>
+<p>We will invite all other teams to evaluate your project. The weighting between peer evaluation and instructor evaluation is <strong>70% (peers)</strong> and <strong>30% (instructor)</strong>.</p>
+<p>The evaluation consists of two main components:</p>
+<ol>
+<li><strong>Project quality</strong> – including implementation quality, system performance, and overall “marketing value” of the final product.  </li>
+<li><strong>Presentation quality</strong> – including slide quality, clarity, and presentation skills.</li>
+</ol>
+<h2 id="final-project-deliverable-20-">Final project deliverable (20%)</h2>
+<p>Each team is responsible for maintaining their <strong>code</strong> (source code, test cases, and configuration files) and <strong>documentation</strong> (e.g., release notes, proposals, design reports, testing reports, meeting records, and issue reports) on <strong>GitHub</strong>. The GitHub repository will serve as the <strong>final project deliverable</strong>. Please note that any discrepancies between the GitHub repository and submitted documentation will <strong>not be considered</strong>, and the final delivery mark may be <strong>penalized</strong> accordingly.</p>
+<h3 id="marking-scheme">Marking Scheme</h3>
+<p>Reports will be evaluated based on <strong>technical content</strong> and <strong>clarity of presentation</strong>. However, fulfilling all listed requirements <strong>does not guarantee</strong> the maximum grade. For example, a technically perfect report for a mediocre project (e.g., one with crashes or bugs) may still receive a low overall grade. Therefore, the <strong>overall quality and impact of the project relative to other teams</strong> is the key factor in determining the grade.</p>
+<p>As with the final presentation, a <strong>ranking-based system</strong> will be used for grading. Teams that produce the most impressive project and documentation will receive the highest ranks. Grades will be scaled to the range <strong>[10, 20]</strong> using the following formula:</p>
+<p><code>Grade = 20 - (rank - 1) * 10 / (number_of_teams - 1)</code></p>
+<h2 id="peer-evaluation">Peer evaluation</h2>
+<p>Each team member will be evaluated based on their performance in the project by other team members and the evaluation result will be counted into their final project grade. For instance, if a member gets 8/10 from peer evaluation, and the grade for the project is 50/60, then the final project grade for this member is 50*0.8= 48. Note that the grade of each individual team member cannot exceed 60.</p>
+<h1 id="deliverable-for-the-course-project">Deliverable for the course project</h1>
+<ul>
+<li>Well maintained and documented GitHub repository</li>
+<li>Project proposal<ul>
+<li>Proposal, find <a href="https://umanitoba-my.sharepoint.com/:w:/g/personal/shaowei_wang_umanitoba_ca/EYedyH6lDcFJp3l4XHeGg1IBfjKwkRs1zUag3kgOR8W44g?e=gdJqxR">Template</a></li>
+<li>Slides for proposal presentation</li>
+</ul>
+</li>
+<li>Deliverable for each sprint<ul>
+<li>See the rubric for each sprint</li>
+</ul>
+</li>
+<li>Technique sharing seminar<ul>
+<li>Slides for technique seminar presentation</li>
+</ul>
+</li>
+<li>Project final report<ul>
+<li>Final report, find <a href="https://umanitoba-my.sharepoint.com/:w:/g/personal/shaowei_wang_umanitoba_ca/ETgTD4jTLPpOlYVfPwqPGLIBLJkkZ1p62BL2yO7AfiJyGg?e=zEyruA">Template</a></li>
+<li>Slides for final project presentation</li>
+</ul>
+</li>
+</ul>
